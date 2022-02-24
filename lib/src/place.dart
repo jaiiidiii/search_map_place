@@ -56,8 +56,9 @@ class Place {
   /// Learn more at [Geolocation docs](https://developers.google.com/maps/documentation/geolocation/intro)
   Future<Geolocation?> get geolocation async {
     if (this._geolocation == null) {
-      this._geolocation = await (_geocode!.getGeolocation(description!)
-          as Future<Geolocation?>); //was FutureOr
+      Geolocation? res =
+          await _geocode!.getGeolocation(description!); //was FutureOr
+      this._geolocation = res;
       return _geolocation;
     }
     return _geolocation;
