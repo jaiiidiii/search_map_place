@@ -303,9 +303,9 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
 
   /// API request function. Returns the Predictions
   Future<dynamic> _makeRequest(input) async {
-    final String authority = "maps.googleapis.com";
+    // final String authority = "maps.googleapis.com";
     String path =
-        "maps/api/place/autocomplete/json?input=$input&key=${widget.apiKey}&language=${widget.language}";
+        "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=${widget.apiKey}&language=${widget.language}";
 
     //"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=${widget.apiKey}&language=${widget.language}";
     if (widget.location != null && widget.radius != null) {
@@ -318,7 +318,7 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
         path += "&types=${widget.placeType!.apiString}";
       }
     }
-    Uri url = Uri.https(authority, path);
+    Uri url = Uri.parse(path);
 
     final response = await http.get(url);
     final json = JSON.jsonDecode(response.body);

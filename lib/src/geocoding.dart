@@ -7,10 +7,12 @@ class Geocoding {
 
   Future<dynamic> getGeolocation(String adress) async {
     String trimmedAdress = adress.replaceAllMapped(' ', (m) => '+');
-    final String authority = "maps.googleapis.com";
+    // final String authority = "maps.googleapis.com";
     final String path =
-        "maps/api/geocode/json?address=$trimmedAdress&key=$apiKey&language=$language";
-    final Uri url = Uri.https(authority, path);
+        "https://maps.googleapis.com/maps/api/geocode/json?address=$trimmedAdress&key=$apiKey&language=$language";
+    // final Uri url = Uri.https(authority, path);
+    final Uri url = Uri.parse(path);
+
     //"https://maps.googleapis.com/maps/api/geocode/json?address=$trimmedAdress&key=$apiKey&language=$language";
     final response = await http.get(url);
     final json = JSON.jsonDecode(response.body);
